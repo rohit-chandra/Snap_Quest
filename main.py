@@ -11,15 +11,13 @@ from tools import ImageCaptionTool, ObjectDetectionTool
 tools = [ImageCaptionTool(), ObjectDetectionTool()]
 
 # k = 5 ==> the number of previous messages to remember
-conversational_memory = ConversationBufferWindowMemory(memory_key = "chat_history",
-                                                       k = 5, return_messages = True)
+conversational_memory = ConversationBufferWindowMemory(memory_key = "chat_history", k = 5, return_messages = True)
 
 # temperature = 0 ==> deterministic/less creative
-llm = ChatOpenAI(openai_api_key = "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",
-                 temperature = 0, model_name = "gpt-3.5-turbo")
+llm = ChatOpenAI(openai_api_key = "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", temperature = 0, model_name = "gpt-3.5-turbo")
 
-agent = initialize_agent(agent = "chat-conversational-react-description", tools = tools, llm = llm, max_iterations = 5,
-                         verbose = True, memory = conversational_memory, early_stopping_method = "generate")
+agent = initialize_agent(agent = "chat-conversational-react-description", tools = tools, llm = llm, max_iterations = 5, 
+                        verbose = True, memory = conversational_memory, early_stopping_method = "generate")
 
 # set title
 st.title("Snap Quest")
