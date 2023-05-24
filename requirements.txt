@@ -1,0 +1,6 @@
+langchain==0.0.178
+Pillow==9.5.0
+Pillow==9.5.0
+streamlit==1.22.0
+torch==2.0.1
+transformers==4.29.2
