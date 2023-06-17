@@ -2,8 +2,9 @@ from transformers import BlipProcessor, BlipForConditionalGeneration, DetrImageP
 from PIL import Image
 import torch
 
- # 
+
 def get_image_caption(image_path):
+    print(f"inside image caption method()")
     """Generated a short caption for the input image
     source: https://huggingface.co/Salesforce/blip-image-captioning-large
 
@@ -57,7 +58,7 @@ def detect_objects(image_path):
     # convert outputs (bounding boxes and class logits) to COCO API
     # let's only keep detections with score > 0.9
     target_sizes = torch.tensor([image.size[::-1]])
-    results = processor.post_process_object_detection(outputs, target_sizes=target_sizes, threshold=0.9)[0]
+    results = processor.post_process_object_detection(outputs, target_sizes = target_sizes, threshold=0.9)[0]
     
     detections = ""
     for score, label, box in zip(results["scores"], results["labels"], results["boxes"]):
@@ -71,7 +72,7 @@ def detect_objects(image_path):
     return detections
 
 if __name__ == "__main__":
-    image_path = "D:/Courses/Computer_vision_engineer/Ask_image_question/img1.jpg"
+    image_path = "./img1.jpg"
     caption = get_image_caption(image_path)
     print(caption)
     detections = detect_objects(image_path)
