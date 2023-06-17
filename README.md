@@ -2,7 +2,7 @@
 
 This is a Streamlit application that allows users to ask questions about an uploaded image and receive responses from a conversational AI agent. The agent uses the OpenAI GPT-3.5 Turbo model to generate answers based on the provided image and user input.
 
-## installation
+## Installation
 
 1. Clone the repository:
 
@@ -10,7 +10,7 @@ This is a Streamlit application that allows users to ask questions about an uplo
         
 2. Change to the project directory:
 
-        cd  ask-question-image-web-app-streamlit-langchain
+        cd  Ask-Question-Image
         
 3. Install the required dependencies:
 
@@ -32,7 +32,7 @@ This is a Streamlit application that allows users to ask questions about an uplo
 
 7. Open your web browser and go to http://localhost:8501 to access the application.
 
-## usage
+## Usage
 
 1. Upload an image by clicking the file upload button.
 
@@ -44,22 +44,22 @@ This is a Streamlit application that allows users to ask questions about an uplo
 
 5. The response will be displayed below the question input.
 
-## tools
+## Tools
 
 The application utilizes the following custom tools:
 
 - **ImageCaptionTool**: Generates a textual caption for the uploaded image.
 - **ObjectDetectionTool**: Performs object detection on the uploaded image and identifies the objects present.
 
-## contributing
+## Contributing
 
 Contributions are welcome! If you have any ideas, improvements, or bug fixes, please submit a pull request.
 
-## license
+## License
 
 This project is licensed under the MIT License.
 
-## acknowledgements
+## Acknowledgements
 
 This project uses the OpenAI GPT-3.5 Turbo model. Visit [OpenAI](https://openai.com/) for more information.
 
