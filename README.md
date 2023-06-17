@@ -51,6 +51,16 @@ The application utilizes the following custom tools:
 - **ImageCaptionTool**: Generates a textual caption for the uploaded image.
 - **ObjectDetectionTool**: Performs object detection on the uploaded image and identifies the objects present.
 
+## Output
+
+**The streamlit application front-end is shown below:**
+
+![output1](./output1.PNG)
+
+
+**The output of the application is shown below:**
+![Output2](./output2.PNG)
+
 ## Contributing
 
 Contributions are welcome! If you have any ideas, improvements, or bug fixes, please submit a pull request.

@@ -1,5 +1,5 @@
 import streamlit as st
-from tempfile import NamedTemporaryFile
+#from tempfile import NamedTemporaryFile
 from dotenv import load_dotenv
 import os
 
@@ -18,6 +18,7 @@ OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 #print(f"OPENAI_API_KEY = {OPENAI_API_KEY}")
 
 # initialize agent
+print(f"Initializing 2 agents...")
 tools = [ImageCaptionTool(), ObjectDetectionTool()]
 
 # k = 5 ==> the number of previous messages to remember
@@ -62,11 +63,13 @@ if file:
     user_question = st.text_input("Ask a question about the image")
     
     # compute agent response
-    with NamedTemporaryFile(dir = '.', mode ="w+b") as f:
-        print(f"inside temporary file")
-        # save image to temporary file
-        f.write(file.getbuffer())
-        image_path = f.name
+    #with NamedTemporaryFile(dir = '.\\temp') as f:
+    #with open(file, "rb") as f:
+    print(f"inside temporary file;opening image file......")
+    with open("D:\Courses\Computer_vision_engineer\Ask_image_question\\temp.jpg", "w+b") as f1:
+    # save image to temporary file
+        f1.write(file.getbuffer())
+        image_path = f1.name
         
         
         # write agennt response

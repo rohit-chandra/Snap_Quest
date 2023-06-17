@@ -11,12 +11,13 @@ class ImageCaptionTool(BaseTool):
     # The description is a natural language description of the tool the LLM uses to decide whether it needs to use it. 
     # Tool descriptions should be very explicit on what they do, when to use them, and when not to use them.
     description = " Use this tool when given the path to an image that you would like to be described. " \
-                  "It will return a simple caption describing the image."
+                "It will return a simple caption describing the image."
     
     def _run(self, img_path):
+        #print(f"inside ImageCaptionTool run()...................; img_path = {img_path}")
         
         image = Image.open(img_path).convert("RGB")
-    
+        #print(f"after opening image.................")
         model_name = "Salesforce/blip-image-captioning-large"
         
         # use cuda if available
@@ -30,9 +31,9 @@ class ImageCaptionTool(BaseTool):
         # return_tensors="pt" ==> Return PyTorch torch.Tensor objects.
         inputs = processor(image, return_tensors="pt").to(device)
         
-        output = model.generate(**inputs, max_length=20)
+        output = model.generate(**inputs, max_new_tokens = 20)
         
-        caption = processor.decode(output[0], skip_special_tokens=True)
+        caption = processor.decode(output[0], skip_special_tokens = True)
         
         return caption
     
@@ -40,18 +41,18 @@ class ImageCaptionTool(BaseTool):
         raise NotImplementedError("This tool does not support async")
     
 
-
 class ObjectDetectionTool(BaseTool):
-    name = "Object dectector"
+    name = "Object detector"
     
     description = "Use this tool when given the path to an image that you would like to detect objects. " \
-                  "It will return a list of all detected objectd. Each element in the list is in the format: " \
-                  "[x1, y1, x2, y2] class_name confidence_score"
+                "It will return a list of all detected objects. Each element in the list in the format: " \
+                "[x1, y1, x2, y2] class_name confidence_score."
     
     def _run(self, img_path):
         image = Image.open(img_path).convert('RGB')
         
         processor = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50")
+        
         model = DetrForObjectDetection.from_pretrained("facebook/detr-resnet-50")
         
         inputs = processor(images=image, return_tensors="pt")
@@ -66,12 +67,12 @@ class ObjectDetectionTool(BaseTool):
         for score, label, box in zip(results["scores"], results["labels"], results["boxes"]):
             # bbox
             detections += '[{}, {}, {}, {}]'.format(int(box[0]), int(box[1]), int(box[2]), int(box[3]))
-            # add label 
+            # label
             detections += ' {}'.format(model.config.id2label[int(label)])
-            # add confidence score
+            # confidence score
             detections += ' {}\n'.format(float(score))
         
         return detections
-    
+
     def _arun(self, query: str):
         raise NotImplementedError("This tool does not support async")
